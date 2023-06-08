@@ -61,7 +61,7 @@
 
 .btn{
     display: flex;
-    margin: 0 10px;
+    margin: 0 30px;
 }
 
 .btnFilter{
@@ -85,9 +85,191 @@
     color: #FF993C;
 }
 
-.table {
-    width: 95%;
-    margin-bottom: 1rem;
-    color: #858796;
+table {
+    position: absolute;
+    width: 1344px;
+    margin: 30px 155px;
+    border-radius: 12px;
+    overflow: hidden;
+}
+  
+th, td {
+    padding: 8px;
+    text-align: left;
+}
+  
+th {
+    width: 106px;
+    height: 49px;
+    background: #dce4ef;
+    font-family: 'Nunito';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 16px;
+    line-height: 24px;
+    color: #000;
+}
+
+tr:nth-child(2n) {
+    background-color: #eaedf6;
+}
+
+.status{
+    width: 123px;
+    height: 31px;
+    display: flex;
+    background: #EAF1F8;
+    border: 1px solid #919DBA;
+    border-radius: 4px;
+}
+
+.status_title_UnUsed,
+.status_title_OutDate,
+.status_title{
+    font-family: 'Montserrat';
+    font-style: normal;
+    font-weight: 500;
+    font-size: 12px;
+    line-height: 15px;
+    display: flex;
+    align-items: center;
+    margin: 0 0;
+}
+
+.status_title_UnUsed{
+    color: #03AC00;
+}
+
+.status_title_OutDate{
+    color: #FD5959;
+}
+
+.status_title{
+    color: #919DBA;
+}
+
+.filter_box{
+    width: 600px;
+    height: 400px;
+    background: #FFFFFF;
+    border-radius: 16px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.header_title{
+    margin: 24px 290px 20px 263px;
+    font-family: 'Montserrat';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 24px;
+    line-height: 30px;
+    display: flex;
+    align-items: center;
+    color: #1E0D03;
+    width: 100px;
+}
+
+.to,
+.from {
+    text-align: left;
     margin: 10px 0;
+    font-family: 'Montserrat';
+    font-style: normal;
+    font-weight: 600;
+    font-size: 16px;
+    line-height: 26px;
+    display: flex;
+    align-items: center;
+    color: #1E0D03;
+    opacity: 0.7;
+}
+
+.date{
+    display: flex;
+    width: 450px;
+    margin: 0 40px;
+    justify-content: space-between;
+}
+
+.radio_box{
+    width: 550px;
+    margin: 5px 40px;
+    height: 60px;
+}
+
+.box_checkIn{
+    width: 400px;
+    margin: 5px 40px;
+    height: 80px;
+}
+
+.box_checked{
+    display: flex;
+    justify-content: space-between;
+    margin: 20px 40px;
+}
+
+.radio_box_check{
+    display: flex;
+    justify-content: space-between;
+    width: 450px;
+    margin: 0 40px;
+}
+
+.radio_box_title{
+    text-align: left;
+    width: 300px;
+    font-family: 'Montserrat';
+    font-style: normal;
+    font-weight: 600;
+    font-size: 16px;
+    line-height: 26px;
+    display: flex;
+    align-items: center;
+    color: #1E0D03;
+    opacity: 0.8;
+}
+
+.customRadio{
+    display: flex;
+    margin: -15px -40px;
+}
+
+.customChecked2,
+.customChecked{
+    display: flex;
+    margin: -15px -40px;
+}
+
+.customChecked2{
+    margin: 5px -40px;
+}
+
+.titileCheckBox,
+.titileRadio{
+    margin: 6px 10px;
+    color: #1E0D03;
+    opacity: 0.7;
+}
+
+.formatRadio{
+    width: 15px;
+    height: 15px;
+    margin: 10px 0;
+    background: #FFFFFF;
+    border-radius: 20px;
+    border: 2px solid #27AEF9;
+}
+
+.btnFilterSearch{
+    margin: 35px 0;
+    width: 160px;
+    height: 48px;
+    border: 1px solid #FF993C;
+    border-radius: 8px; 
+    color: #FF993C;
+    background: #FFFFFF;
 }

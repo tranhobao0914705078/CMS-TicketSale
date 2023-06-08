@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import logo from './logo.svg';
 import './Styles/sb-admin-2.min.css'
 import './App.css';
@@ -8,6 +8,9 @@ import { DefaultLayout } from './pages/DefaultLayout/DefaultLayout';
 import { Dashboard } from './pages/Dashboard/Dashboard';
 
 function App() {
+  useEffect(() => {
+    document.title = 'CMS Ticket Sale'
+  }, [])
   return (
     <div className='App' id="wrapper">
        <Router>

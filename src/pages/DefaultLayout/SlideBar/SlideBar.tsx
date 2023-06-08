@@ -3,8 +3,8 @@ import { Link, useLocation } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faGear, faCommentAlt, faHouse, faTicket} from '@fortawesome/free-solid-svg-icons';
 import styles from './SlideBar.module.css'
-import logo from './icon/logo.svg'
-import icon from '../icon/icon.svg'
+import logo from '../icon/logo.svg'
+import icon from'../icon/icon.svg'
 
 export const SlideBar = () => {
   const [activeItem, setActiveItem] = useState<string>('/');
