@@ -1,0 +1,97 @@
+.container{
+    width: 700px;
+    height: 340px;
+    background: #FFFFFF;
+    border-radius: 16px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.header_title{
+    margin: 24px auto;
+    font-family: 'Montserrat';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 24px;
+    line-height: 30px;
+    display: flex;
+    align-items: center;
+    color: #1E0D03;
+    width: 208px;
+}
+
+.content{
+    /* width: 600px; */
+    height: 180px;
+    margin: 0 25px;
+}
+
+.custom{
+    margin: 0 80px;
+}
+
+.customDate{
+    margin: 0 70px;
+}
+
+.content_title{
+    /* width: 600px; */
+    margin: 0px 0;
+    height: 40px;
+    display: flex;
+    /* justify-content: space-between; */
+}
+
+.content_value{
+    margin: 0 120px;
+}
+
+.content_pointer{
+    cursor: pointer;
+}
+
+.btn{
+    width: 350px;
+    height: 62px;
+    margin: 0 184px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.btn_save,
+.btn_cancle{
+    width: 160px;
+    height: 48px;
+    border: 1px solid #FF993C;
+    border-radius: 8px;
+    background: transparent;
+    font-weight: 600;
+}
+
+.btn_cancle{
+    color: #FF993C;
+}
+
+.btn_save{
+    background: #FF993C;
+    color: #FFFFFF;
+}
+
+.Calendar{
+    width: 141px;
+    height: 40px;
+    margin: -5px 68px;
+    border: 1px solid #b5b1b1;
+    display: flex;
+    justify-content: space-between;
+    padding: 6px 10px;
+    border-radius: 10px;
+}
+
+.calendarCustom{
+    position: absolute;
+    top: 310px;
+    left: 300px;
+}

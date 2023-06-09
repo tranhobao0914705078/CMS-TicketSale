@@ -21,3 +21,11 @@
     background-color: #FD5959;
     margin: 8px 15px;
 }
+
+.status_Off{
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background-color: #FD5959;
+    margin: 8px 15px;
+}

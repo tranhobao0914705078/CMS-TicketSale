@@ -1,0 +1,109 @@
+import React from 'react'
+import ReactPaginate from 'react-paginate'
+import next from './icon/next.svg'
+import prev from './icon/prev.svg'
+import styles from './paginate.module.css'
+
+export interface IPaginationProps {
+    initialPage?: number;
+    marginPagesDisplayed?: number;
+    pageCount: number;
+    pageRangeDisplayed?: number;
+    onChange: ({ selected }: { selected: number; }) => void;
+}
+
+export const paginateCustom: React.FC<IPaginationProps> = ({
+    initialPage,
+    marginPagesDisplayed,
+    pageCount,
+    pageRangeDisplayed,
+    onChange,
+}) => {
+  return (
+    <ReactPaginate 
+        initialPage={initialPage}
+        marginPagesDisplayed={marginPagesDisplayed}
+        pageRangeDisplayed={pageRangeDisplayed}
+        pageCount={pageCount}
+        onPageChange={onChange}
+        containerClassName={styles.Pagination}
+        activeClassName={styles.pagination_active}
+        pageLinkClassName={styles.pagination_link}
+        breakLinkClassName={styles.pagination_break_link}
+        previousLinkClassName={styles.pagination_prev_link}
+        nextLinkClassName={styles.pagination_next_link}
+        pageClassName={styles.pagination_item}
+        breakClassName={styles.pagination_break}
+        nextClassName={styles.pagination_next}
+        previousClassName={styles.pagination_previous}
+        previousLabel={
+            <>
+                <img src={prev} alt="" />
+            </>
+        }
+        nextLabel={
+            <>
+                <img src={next} alt="" />
+            </>
+        }
+    />
+  )
+}
+
+//styles
+.Pagination{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    list-style: none;
+    outline: transparent;
+}
+
+.Pagination > li {
+    margin: 2px;
+    height: 30px;
+    width: 30px;
+}
+
+.Pagination > li > a {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 30px;
+    width: 30px;
+    color: #333;
+    background-color: transparent;
+    border-radius: 4px;
+    outline: transparent;
+    cursor: pointer;
+}
+
+.Pagination > li > a:hover{
+    background-color: #e4e4e4;
+}
+
+.Pagination > .pagination_active > a{
+    background-color: rgba(176, 151, 106, 1);
+    border-color: rgba(176, 151, 106, 1);
+    color: #FFFFFF;
+}
+
+.Pagination > .pagination_active > a,
+.Pagination > .pagination_active > a:hover,
+.Pagination > .pagination_active > a:focus{
+    background-color: rgba(176, 151, 106, 1);
+    border-color: rgba(176, 151, 106, 1);
+    outline: transparent;
+    cursor: default;
+}
+
+.Pagination > .disabled > a{
+    cursor: default;
+}
+
+.Pagination > .disabled > a:hover{
+    background-color: transparent;
+}
+
+
+

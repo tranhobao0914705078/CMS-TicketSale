@@ -1,16 +1,18 @@
 import React, {useState} from 'react'
-import styles from'./ListTicket.module.css'
+import styles from'./PackService.module.css'
 import iconSearch from './icon/search.svg'
 import iconFilter from './icon/filter.svg'
 import iconEllipsis from './icon/ellip.svg'
+import iconEdit from './icon/edit.svg'
 import Pagination from '../../../component/Paginate/paginate'
 import { Used } from '../../../component/Status/Used'
 import { UnUsed } from '../../../component/Status/UnUsed'
 import { OutDate } from '../../../component/Status/OutDate'
 import { ChangeTicket } from '../../../component/ChangeTicket/formChangeTicket'
 import { CalendarCustom } from '../../../component/Calendar/CustomCalendar/CustomCalendar'
+import { StatusOff } from '../../../component/Status/StatusOff'
 
-export const ListTicket = () => {
+export const PackService = () => {
 
   const [count, setCount] = useState(0);
   const [isVisibleFilter, setIsVisibleFilter] = useState(false);
@@ -45,7 +47,7 @@ export const ListTicket = () => {
   return (
     <div className={styles.container}>
       <div className={styles.headerTitle}>
-        <h2 className={styles.title}>Danh sách vé</h2>
+        <h2 className={styles.title}>Danh sách gói vé</h2>
       </div>
       <div className={styles.actions}>
         <div className={styles.Search}>
@@ -56,11 +58,10 @@ export const ListTicket = () => {
         </div>
         <div className={styles.btn}>
           <div className={styles.btnFilter}>
-            <img src={iconFilter} alt="" />
-            <button className={styles.filterTicket} onClick={handleFilter}>Lọc vé</button>
+            <button className={styles.filterTicket} onClick={handleFilter}>Xuất file (.csv)</button>
           </div>
-          <div className={styles.btnFilter}>
-            <button className={styles.filterTicket}>Xuất file (.csv)</button>
+          <div className={styles.btnAdd}>
+            <button className={styles.addTicket}>Thêm gói vé</button>
           </div>
         </div>
       </div>
@@ -68,93 +69,58 @@ export const ListTicket = () => {
         <thead>
           <tr>
             <th>STT</th>
-            <th>Booking code</th>
-            <th>Số vé</th>
-            <th>Tên sự kiện</th>
-            <th>Tình trạng sử dụng</th>
-            <th>Ngày sử dụng</th>
-            <th>Ngày xuất vé</th>
-            <th>Cổng check-in</th>
+            <th>Mã gói</th>
+            <th>Tên gói vé</th>
+            <th>Ngày áp dụng</th>
+            <th>Ngày hết hạn</th>
+            <th>Giá vé (VNĐ/Vé)</th>
+            <th style={{width: '150px'}}>Giá Combo (VNĐ/Combo)</th>
+            <th>Tình trạng</th>
+            <th></th>
           </tr>
         </thead>
         <tbody>
           <tr>
             <td>1</td>
             <td>ALT20210501</td>
-            <td>123456789034</td>
-            <td style={{width: '200px'}}>Hội chợ triển lãm tiêu dùng 2021</td>
-            <td>
-              <div className={styles.status}>
-                <Used />
-                <p className={styles.status_title}>Đã sử dụng</p>
-              </div>
-            </td>
-            <td>14/04/2021</td>
-            <td>14/04/2021</td>
-            <td>Cổng 1</td>
-          </tr>
-          <tr>
-            <td>1</td>
-            <td>ALT20210501</td>
-            <td>123456789034</td>
-            <td style={{width: '200px'}}>Hội chợ triển lãm tiêu dùng 2021</td>
+            <td>Gói gia đình</td>
+            <td>14/04/2021 <br />08:00:00</td>
+            <td>14/04/2021 <br />23:00:00</td>
+            <td>90.000 VNĐ</td>
+            <td>360.000 VNĐ/4 Vé</td>
             <td>
               <div className={styles.status}>
                   <UnUsed />
-                  <p className={styles.status_title_UnUsed}>Chưa sử dụng</p>
+                  <p className={styles.status_title_UnUsed}>Đang sử dụng</p>
               </div>
             </td>
-            <td></td>
-            <td>14/04/2021</td>
-            <td className={styles.statusUnUsed}>
-              <p>-</p>
-              <button className={styles.iconEllipsis} onClick={handleChange}><img src={iconEllipsis} alt="" /></button>
+            <td>
+                <div className={styles.actionsEdit}>
+                    <img src={iconEdit} alt="" />
+                    <p>Cập nhật</p>
+                </div>
             </td>
           </tr>
           <tr>
-            <td>1</td>
+            <td>2</td>
             <td>ALT20210501</td>
-            <td>123456789034</td>
-            <td style={{width: '200px'}}>Hội chợ triển lãm tiêu dùng 2021</td>
+            <td>Gói gia đình</td>
+            <td>14/04/2021 <br />08:00:00</td>
+            <td>14/04/2021 <br />23:00:00</td>
+            <td>90.000 VNĐ</td>
+            <td>360.000 VNĐ/4 Vé</td>
             <td>
-              <div className={styles.status}>
-                  <OutDate />
-                  <p className={styles.status_title_OutDate}>Hết hạn</p>
+              <div className={styles.status_Off}>
+                  <StatusOff />
+                  <p className={styles.status_title_Off}>Tắt</p>
               </div>
             </td>
-            <td>14/04/2021</td>
-            <td>14/04/2021</td>
-            <td>Cổng 1</td>
-          </tr>
-          <tr>
-            <td>1</td>
-            <td>ALT20210501</td>
-            <td>123456789034</td>
-            <td style={{width: '200px'}}>Hội chợ triển lãm tiêu dùng 2021</td>
             <td>
-              <div className={styles.status}>
-                  <OutDate />
-                  <p className={styles.status_title_OutDate}>Hết hạn</p>
-              </div>
+                <div className={styles.actionsEdit}>
+                    <img src={iconEdit} alt="" />
+                    <p>Cập nhật</p>
+                </div>
             </td>
-            <td>14/04/2021</td>
-            <td>14/04/2021</td>
-            <td>Cổng 1</td>
-          </tr>
-          <tr>
-            <td>1</td>
-            <td>ALT20210501</td>
-            <td>123456789034</td>
-            <td style={{width: '200px'}}>Hội chợ triển lãm tiêu dùng 2021</td>
-            <td>
-              <div className={styles.status}>
-                  <OutDate />
-                  <p className={styles.status_title_OutDate}>Hết hạn</p>
-              </div>
-            </td>
-            <td></td>
-            <td>14/04/2021</td>
-            <td>-</td>
           </tr>
         </tbody>
       </table>

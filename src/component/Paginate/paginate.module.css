@@ -1,0 +1,22 @@
+.Prev{
+    border: none;
+    background-color: transparent;
+}
+
+.Next{
+    border: none;
+    background-color: transparent;
+}
+
+.numberPagi{
+    border: none;
+    background-color: transparent;
+}
+
+.active{
+    width: 32px;
+    height: 32px;
+    border: 1px solid #FF7506;
+    border-radius: 4px;
+    color: #FF7506;
+}

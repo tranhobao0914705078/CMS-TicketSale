@@ -73,16 +73,44 @@
     border-radius: 6px;
 }
 
+.btnAdd{
+    margin: 0 5px;
+    width: 127px;
+    height: 48px;
+    border-radius: 6px;
+}
+
+.btnAdd:hover{
+    opacity: 0.8;
+}
+
+.addTicket,
 .filterTicket{
     border: none;
-    background-color: transparent;
     outline: none;
     font-family: 'Montserrat';
     font-style: normal;
     font-weight: 700;
     font-size: 18px;
     line-height: 26px;
+}
+
+.filterTicket{
+    background-color: transparent;
     color: #FF993C;
+}
+
+.filterTicket:hover{
+    opacity: 0.8;
+}
+
+.addTicket{
+    background-color: #FF993C;
+    width: 127px;
+    border: 1px solid #FF993C;
+    border-radius: 6px;
+    height: 48px;
+    color: #FFFFFF;
 }
 
 table {
@@ -123,6 +151,16 @@ tr:nth-child(2n) {
     border-radius: 4px;
 }
 
+.status_Off{
+    width: 70px;
+    height: 31px;
+    display: flex;
+    background: #f1ded9;
+    border: 1px solid #FD5959;
+    border-radius: 4px;
+}
+
+.status_title_Off,
 .status_title_UnUsed,
 .status_title_OutDate,
 .status_title{
@@ -146,6 +184,10 @@ tr:nth-child(2n) {
 
 .status_title{
     color: #919DBA;
+}
+
+.status_title_Off{
+    color: #FD5959;
 }
 
 .filter_box{
@@ -292,4 +334,24 @@ tr:nth-child(2n) {
     text-align: center;
     display: flex;
     justify-content: center;
+}
+
+.actionsEdit{
+    width: 140px;
+    height: 40px;
+    display: flex;
+    justify-content: space-between;
+    padding: 5px 20px;
+}
+
+.actionsEdit p{
+    margin: 2px 5px;
+    font-weight: 500;
+    font-size: 14px;
+    color: #FF993C;
+}
+
+.actionsEdit img{
+    width: 24px;
+    height: 24px;
 }

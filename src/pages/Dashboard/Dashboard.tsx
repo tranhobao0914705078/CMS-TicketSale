@@ -20,6 +20,8 @@ export const Dashboard = () => {
       setActiveItem('ticket')
     }else if(path === '/check-ticket'){
       setActiveItem('check-ticket')
+    }else if(path === '/pack-service'){
+      setActiveItem('pack-service')
     }
   }, [location]) 
 
@@ -60,12 +62,11 @@ export const Dashboard = () => {
               <FontAwesomeIcon icon={faCommentAlt} className={styles.dashboardIcon}/>
                 <span className={styles.title}>Đối soát vé</span></Link>
             </li>
-            <li className={`nav-item ${activeItem === 'manageNumber' ? styles.active : ''} ${styles.Category}`}>
+            <li className={`nav-item ${activeItem === 'pack-service' ? styles.active : ''} ${styles.Category}`}>
               <Link className="nav-link" to="#" onClick={handleClickSetting}>
-                <FontAwesomeIcon icon={faGear} className={styles.dashboardIcon}/>
+              <FontAwesomeIcon icon={faGear} className={styles.dashboardIcon}/>
                 <span className={styles.title}>Cài đặt</span></Link>
-
-                {visible && <p className={styles.packService}>Gói dịch vụ</p>}
+                {visible && <Link to="/pack-service" className={styles.packService}>Gói dịch vụ</Link>}
             </li>
             <div  className={styles.footer}>
               <p>Copyright</p>

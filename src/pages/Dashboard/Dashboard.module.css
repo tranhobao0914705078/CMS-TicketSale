@@ -189,6 +189,12 @@
     color: #1E0D03;
 }
 
+.packService:hover{
+    list-style: none;
+    text-decoration: none;
+    color: #1E0D03;
+}
+
 .logoPage{
     position: absolute;
     top: 12px;
