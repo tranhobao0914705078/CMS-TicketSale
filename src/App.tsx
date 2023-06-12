@@ -6,6 +6,8 @@ import { BrowserRouter as Router, Routes, Route, useParams  } from 'react-router
 import { publicRoutes } from './routes';
 import { DefaultLayout } from './pages/DefaultLayout/DefaultLayout';
 import { Dashboard } from './pages/Dashboard/Dashboard';
+import { collection, getDocs, onSnapshot, query, where } from "firebase/firestore";
+import { db } from './firebase-config/firebase';
 
 function App() {
   useEffect(() => {

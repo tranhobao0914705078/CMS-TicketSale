@@ -7,9 +7,10 @@ import { getNumberOfDaysInMonth, getStoredDay, range } from'./index';
 
 interface Props{
   className: string;
+  onSelectDate: (date: string | null) => void;
 }
 
-export const CalendarCustom = ({ className }: Props) => {
+export const CalendarCustom = ({ className, onSelectDate }: Props) => {
   const [currentMonth, setCurrentMonth] = useState(new Date().getMonth());
   const [currentYear, setCurrentYear] = useState(new Date().getFullYear());
   const [currentDate, setCurrentDate] = useState(new Date());
@@ -38,6 +39,11 @@ export const CalendarCustom = ({ className }: Props) => {
   const handleSelectDate = (e: React.MouseEvent<HTMLDivElement>) => {
     const target = e.target as HTMLDivElement;
     const day = target.getAttribute('data-day');
+    const currentDate =  new Date();
+    const month = currentDate.getMonth() + 1;
+    const year = currentDate.getFullYear();
+    const getDate = `${day}/${month}/${year}`
+    onSelectDate(getDate);
     setSelectDate(day);
   }
 

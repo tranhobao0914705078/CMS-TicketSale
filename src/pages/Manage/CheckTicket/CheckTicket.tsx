@@ -127,7 +127,7 @@ export const CheckTicket = () => {
             <p className={styles.statusCheck}>Tình trạng đối soát</p>
             <div>
               <div className={styles.customRadio}>
-                  <input type="radio" className={styles.formatRadio} checked name="status"/>
+                  <input type="radio" className={styles.formatRadio} name="status"/>
                   <p className={styles.titileRadio}>Tất cả</p>
               </div>
               <div className={styles.customRadio}>

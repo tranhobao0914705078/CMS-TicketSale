@@ -1,13 +1,16 @@
 import React, { useState } from 'react'
 import styles from './styles.module.css'
 import iconCalendar from './icon/icon.svg'
-import { CalendarCustom } from '../Calendar/CustomCalendar/CustomCalendar'
+import { CalendarCustom } from '../Calendar/CalendarCustom'
 
 export const ChangeTicket = () => {
     const [date, setDate] = useState(new Date().toLocaleDateString());
     const [visible, setVisible] = useState(true);
     const [count, setCount] = useState(0);
     const [visibleCalendar, setVisibleCalendar] = useState(false);
+    const [selectedDate, setSelectedDate] = useState<string | null>(null);
+
+    
     const handlClick = () => {
         setVisible(false);
     }
@@ -54,7 +57,7 @@ export const ChangeTicket = () => {
             </div>
         </div>
         }
-        {visibleCalendar && <div className={styles.calendarCustom}><CalendarCustom /></div>}
+        {visibleCalendar && <div className={styles.calendarCustom}><CalendarCustom className='' onSelectDate={setSelectedDate}/></div>}
     </div>
   )
 }

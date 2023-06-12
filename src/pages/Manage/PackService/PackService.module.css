@@ -349,9 +349,18 @@ tr:nth-child(2n) {
     font-weight: 500;
     font-size: 14px;
     color: #FF993C;
+    cursor: pointer;
 }
 
 .actionsEdit img{
     width: 24px;
     height: 24px;
+}
+
+.CSV{
+    color: #FF993C;
+}
+
+.CSV:hover{
+    text-decoration: none;
 }

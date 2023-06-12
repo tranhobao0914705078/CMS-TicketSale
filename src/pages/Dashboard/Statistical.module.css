@@ -1,0 +1,168 @@
+.headerTitle{
+    text-align: left;
+    margin: 24px 24px;
+    font-weight: 700;
+    font-size: 36px;
+    line-height: 54px;
+    color: #1E0D03;
+}
+
+.lineChart{
+    width: 1620px;
+    margin: 0 20px;
+    height: 360px;
+}
+
+.titleChart{
+    width: 1620px;
+    height: 100px;
+    display: flex;
+    justify-content: space-between;
+    padding: 0 20px;
+}
+
+.revenue{
+    font-weight: 600;
+    font-size: 18px;
+    line-height: 28px;
+    color: #1E0D03;
+}
+
+.date{
+    padding: 6px 10px;
+    width: 155px;
+    height: 40px;
+    display: flex;
+    background: #FFFFFF;
+    border: 1px solid #E6E0E0;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.iconCalendar{
+    position: absolute;
+    width: 20px;
+    margin: 2px 115px;
+}
+
+.customLineChart{
+    position: absolute;
+    margin: -75px 0px;
+}
+
+.revenueOfWeek{
+    text-align: left;
+    margin: 24px;
+}
+
+.moneyBox{
+    display: flex;
+    margin: -10px 0;
+}
+
+.money{
+    margin-right: 5px;
+    font-weight: 700;
+    font-size: 24px;
+    line-height: 30px;
+    color: #1E0D03;
+}
+
+.moneyBox span{
+    margin: 8px 0;
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 22px;
+    color: #1E0D03;
+}
+
+.donutChart_date{
+    padding: 6px 10px;
+    width: 155px;
+    height: 40px;
+    display: flex;
+    background: #FFFFFF;
+    border: 1px solid #E6E0E0;
+    border-radius: 4px;
+    cursor: pointer;
+    margin: 24px;
+}
+
+.boxDonutChart{
+    width: 700px;
+    height: 220px;
+    margin: 50px 250px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.customDonutChart1{
+    width: 200px;
+    margin: -18px 50px;
+}
+
+.customDonutChart2{
+    width: 200px;
+    margin: -118px 50px;
+}
+
+.package{
+    position: absolute;
+    margin: -40px 150px;
+    font-weight: 600;
+    font-size: 18px;
+    line-height: 28px;
+    color: #1E0D03;
+}
+
+.boxDataLeft{
+    position: absolute;
+    width: 67px;
+    height: 46px;
+    background: #FFFFFF;
+    box-shadow: 0px 0px 50px rgba(50, 50, 71, 0.25);
+    border-radius: 12px;
+    padding: 10px 0;
+    margin: 80px 52px;
+}
+
+.boxDataRight p,
+.boxDataLeft p{
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 22px;
+    color: #1E0D03;
+}
+
+.boxDataRight{
+    position: absolute;
+    width: 67px;
+    height: 46px;
+    background: #FFFFFF;
+    box-shadow: 0px 0px 50px rgba(50, 50, 71, 0.25);
+    border-radius: 12px;
+    padding: 10px 0;
+    margin: 40px 270px;
+}
+
+.boxDataLeft2{
+    position: absolute;
+    width: 67px;
+    height: 46px;
+    background: #FFFFFF;
+    box-shadow: 0px 0px 50px rgba(50, 50, 71, 0.25);
+    border-radius: 12px;
+    padding: 10px 0;
+    margin: 80px 420px;
+}
+
+.boxDataRight2{
+    position: absolute;
+    width: 67px;
+    height: 46px;
+    background: #FFFFFF;
+    box-shadow: 0px 0px 50px rgba(50, 50, 71, 0.25);
+    border-radius: 12px;
+    padding: 10px 0;
+    margin: 40px 630px;
+}

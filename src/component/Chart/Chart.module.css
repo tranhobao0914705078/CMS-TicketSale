@@ -1,0 +1,14 @@
+.donutChart{
+    width: 248px;
+}
+
+.donutChart2{
+    width: 500px;
+    height: 450px;
+}
+
+.lineChart{
+    width: 1000px;
+    height: 300px;
+    margin: 10px 0;
+}

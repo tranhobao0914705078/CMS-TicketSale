@@ -184,6 +184,7 @@ tr:nth-child(2n) {
     border-radius: 20px;
     border: 2px solid #27AEF9;
     width: 20px;
+    cursor: pointer;
 }
 
 .titileRadio{

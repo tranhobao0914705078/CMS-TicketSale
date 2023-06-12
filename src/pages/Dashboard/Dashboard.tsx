@@ -6,6 +6,7 @@ import styles from './Dashboard.module.css'
 import logo from '../image/logo.svg'
 import icon from '../image/icon.svg'
 import { Header } from '../DefaultLayout/Header';
+import { Statistical } from './Statistical';
 
 export const Dashboard = () => {
   const [activeItem, setActiveItem] = useState<string>('/');
@@ -75,7 +76,7 @@ export const Dashboard = () => {
             </div>
           </ul>
           <div className={styles.content}>
-
+              <Statistical />
           </div>
         </div>
         
