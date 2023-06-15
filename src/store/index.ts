@@ -1,9 +1,11 @@
 import { combineReducers, applyMiddleware, createStore, compose } from "redux";
 import ThunkMiddleware  from "redux-thunk";
 import { reducerTicket } from "./TicketReducer";
+import { reducerManageTicket } from "./ManageTicket";
 
-const ticketReducer = combineReducers({
-    ticket: reducerTicket
+const rootReducer = combineReducers({
+    ticket: reducerTicket,
+    manage: reducerManageTicket
 })
 
 declare global{
@@ -14,12 +16,11 @@ declare global{
 
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 
-export type AppState = ReturnType<typeof ticketReducer>;
+export type AppState = ReturnType<typeof rootReducer>;
 
 export default function configureStore(){
     const middlewares = [ThunkMiddleware];
     const middlewareEnhancer = applyMiddleware(...middlewares);
 
-    return createStore(ticketReducer, composeEnhancers(middlewareEnhancer));
-
+    return createStore(rootReducer, composeEnhancers(middlewareEnhancer));
 }

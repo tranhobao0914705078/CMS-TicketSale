@@ -36,7 +36,7 @@
     margin: -8px 0;
     width: 380px;
     color: #828282;
-    font-size: 1.6rem;
+    font-size: 1.2rem;
     border: none;
     outline: none;
 }
@@ -114,13 +114,30 @@ tr:nth-child(2n) {
     background-color: #eaedf6;
 }
 
+.boxStatusOutDate,
+.boxStatusUnUsed,
 .status{
-    width: 123px;
     height: 31px;
     display: flex;
+    border-radius: 4px;
+}
+
+.status{
+    width: 123px;
     background: #EAF1F8;
     border: 1px solid #919DBA;
-    border-radius: 4px;
+}
+
+.boxStatusUnUsed{
+    width: 126px;
+    background: #b6eeb4;
+    border: 1px solid #03AC00;
+}
+
+.boxStatusOutDate{
+    width: 89px;
+    background: #F8EBE8;
+    border: 1px solid #FD5959;
 }
 
 .status_title_UnUsed,

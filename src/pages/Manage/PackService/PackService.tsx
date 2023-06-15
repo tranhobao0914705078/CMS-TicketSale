@@ -15,8 +15,12 @@ import { getFirestore, collection, addDoc, getDocs, doc, updateDoc, getDoc } fro
 import { db, app } from '../../../firebase-config/firebase';
 import { reducerTicket, State } from '../../../store/TicketReducer';
 import { CSVLink } from 'react-csv';
-import { headersCSV } from '../../../store/HeaderCSV';
+import { headersServiceCSV } from '../../../store/HeaderCSV/HeaderCSVService';
 
+interface TicketData {
+  id: string;
+  // code_ticket: string;
+}
 
 export const PackService = () => {
 
@@ -25,8 +29,10 @@ export const PackService = () => {
   const [isVisibleUpdate, setIsVisibleUpdate] = useState(false);
   const [currentPage, setCurrentPage] = useState(1);
   const totalPage = 20;
-  const [data, setData] = useState<{ id: string }[]>([]);
+  const [data, setData] = useState<TicketData[]>([]);
   const [state, dispatch] = useReducer(reducerTicket, {data: []} as State);
+  const [searchTerm, setSearchTerm] = useState('');
+  const [currentId, setCurrentId] = useState("");
   const db = getFirestore(app);
 
   useEffect(() => {
@@ -34,13 +40,14 @@ export const PackService = () => {
       const querySnapshot = await getDocs(collection(db, "ListTicket"));
       const data = querySnapshot.docs.map((doc) => ({
         id: doc.id,
+        // code_ticket: doc.data().code_ticket,
         ...doc.data(),
       }));
       dispatch({type: "GET_DATA", payload: data});
       setData(data);
-    };
+    }
     fetchData();
-  }, []);
+  }, [])
 
   const handlePageChange = (newPage: number) => {
     setCurrentPage(newPage);
@@ -55,7 +62,8 @@ export const PackService = () => {
       setCount(0)
     }
   }
-  const handleUpdate = () => {
+  const handleUpdate = async(id: string) => {
+    setCurrentId(id);
     setCount(count + 1);
     if(count === 0){
       setIsVisibleUpdate(true)
@@ -72,7 +80,8 @@ export const PackService = () => {
       </div>
       <div className={styles.actions}>
         <div className={styles.Search}>
-          <input type="text" placeholder='Tìm bằng số vé'/>
+          <input value={searchTerm}
+                  onChange={event => setSearchTerm(event.target.value)} type="text" placeholder='Tìm bằng số vé'/>
           <button className={styles.search_btn}>
             <img src={iconSearch} alt="" />
           </button>
@@ -80,7 +89,7 @@ export const PackService = () => {
         <div className={styles.btn}>
           <div className={styles.btnFilter}>
             <button className={styles.filterTicket}>
-              <CSVLink data={data} headers={headersCSV}>
+              <CSVLink data={data} headers={headersServiceCSV}>
                 <p className={styles.CSV}>Xuất file (.csv)</p>
               </CSVLink>
             </button>
@@ -105,7 +114,10 @@ export const PackService = () => {
           </tr>
         </thead>
         <tbody>
-          {state.data.map((item, index) => 
+          {state.data
+          .sort((a, b) => a.stt - b.stt)
+          .filter(item => item.code_ticket.includes(searchTerm))
+          .map((item, index) => 
             <tr key={index}>
               <td>{item.stt}</td>
               <td>{item.code_ticket}</td>
@@ -116,7 +128,6 @@ export const PackService = () => {
               <td>
                 {item.price_ticket.combo_ticket.price !== '' ? `${(+item.price_ticket.combo_ticket.price).toLocaleString()} VNĐ /${item.price_ticket.combo_ticket.ticket} vé` : null}
               </td>
-
               <td>
                 <div className={item.status === 1 ? styles.status : styles.status_Off}>
                   {item.status === 1 ? <UnUsed /> : <StatusOff />}
@@ -128,7 +139,7 @@ export const PackService = () => {
               <td>
                 <div className={styles.actionsEdit}>
                     <img src={iconEdit} alt="" />
-                    <p onClick={handleUpdate}>Cập nhật</p>
+                    <p onClick={() => handleUpdate(item.id)}>Cập nhật</p>
                 </div>
             </td>
             </tr>
@@ -140,7 +151,7 @@ export const PackService = () => {
       </div>
       {/* Add */}
       {isVisibleAdd && <AddTicket />}
-      {isVisibleUpdate && <UpdateTicket />}
+      {isVisibleUpdate && <UpdateTicket currentId={currentId}/>}
     </div>
   )
 }

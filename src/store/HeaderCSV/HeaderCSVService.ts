@@ -1,4 +1,4 @@
-export const headersCSV = [
+export const headersServiceCSV = [
     { label: 'STT', key: 'stt' },
     { label: 'Mã gói', key: 'code_ticket' },
     { label: 'Tên gói', key: 'name_ticket' },

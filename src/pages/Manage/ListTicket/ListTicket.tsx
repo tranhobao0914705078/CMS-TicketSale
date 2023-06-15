@@ -1,4 +1,4 @@
-import React, {useState} from 'react'
+import React, {useState, useEffect, useReducer} from 'react'
 import styles from'./ListTicket.module.css'
 import iconSearch from './icon/search.svg'
 import iconFilter from './icon/filter.svg'
@@ -8,18 +8,43 @@ import { Used } from '../../../component/Status/Used'
 import { UnUsed } from '../../../component/Status/UnUsed'
 import { OutDate } from '../../../component/Status/OutDate'
 import { ChangeTicket } from '../../../component/ChangeTicket/formChangeTicket'
+import { getFirestore, collection, addDoc, getDocs, doc, updateDoc, getDoc } from "firebase/firestore"; 
+import { db, app } from '../../../firebase-config/firebase';
+import { reducerTicket, State } from '../../../store/TicketReducer'
+
+
+interface TicketData{
+  id: string;
+}
 
 export const ListTicket = () => {
 
   const [count, setCount] = useState(0);
   const [isVisibleFilter, setIsVisibleFilter] = useState(false);
   const [isVisibleChange, setIsVisibleChange] = useState(false);
-
   const [currentPage, setCurrentPage] = useState(1);
   const totalPage = 20;
   const handlePageChange = (newPage: number) => {
     setCurrentPage(newPage);
   }
+
+  const [data, setData] = useState<TicketData[]>([]);
+  const [state, dispatch] = useReducer( reducerTicket, {data: []} as State);
+  const [filterInput, setFilterInput] = useState("");
+
+
+  useEffect(() => {
+    const fetchData = async () => {
+      const querySnapshot = await getDocs(collection(db, "Ticket"));
+      const data = querySnapshot.docs.map((doc) => ({
+        id: doc.id,
+        ...doc.data()
+      }));
+      dispatch({type: "GET_DATA", payload: data});
+      setData(data);
+    }
+    fetchData();
+  }, []);
   
   const handleFilter = () => {
     setCount(count + 1);
@@ -48,7 +73,7 @@ export const ListTicket = () => {
       </div>
       <div className={styles.actions}>
         <div className={styles.Search}>
-          <input type="text" placeholder='Tìm bằng số vé'/>
+          <input type="text" value={filterInput} onChange={e => setFilterInput(e.target.value)} placeholder='Tìm bằng số vé'/>
           <button className={styles.search_btn}>
             <img src={iconSearch} alt="" />
           </button>
@@ -77,84 +102,39 @@ export const ListTicket = () => {
           </tr>
         </thead>
         <tbody>
-          <tr>
-            <td>1</td>
-            <td>ALT20210501</td>
-            <td>123456789034</td>
-            <td style={{width: '200px'}}>Hội chợ triển lãm tiêu dùng 2021</td>
-            <td>
-              <div className={styles.status}>
-                <Used />
-                <p className={styles.status_title}>Đã sử dụng</p>
-              </div>
-            </td>
-            <td>14/04/2021</td>
-            <td>14/04/2021</td>
-            <td>Cổng 1</td>
-          </tr>
-          <tr>
-            <td>1</td>
-            <td>ALT20210501</td>
-            <td>123456789034</td>
-            <td style={{width: '200px'}}>Hội chợ triển lãm tiêu dùng 2021</td>
-            <td>
-              <div className={styles.status}>
-                  <UnUsed />
-                  <p className={styles.status_title_UnUsed}>Chưa sử dụng</p>
-              </div>
-            </td>
-            <td></td>
-            <td>14/04/2021</td>
-            <td className={styles.statusUnUsed}>
-              <p>-</p>
-              <button className={styles.iconEllipsis} onClick={handleChange}><img src={iconEllipsis} alt="" /></button>
-            </td>
-          </tr>
-          <tr>
-            <td>1</td>
-            <td>ALT20210501</td>
-            <td>123456789034</td>
-            <td style={{width: '200px'}}>Hội chợ triển lãm tiêu dùng 2021</td>
-            <td>
-              <div className={styles.status}>
-                  <OutDate />
-                  <p className={styles.status_title_OutDate}>Hết hạn</p>
-              </div>
-            </td>
-            <td>14/04/2021</td>
-            <td>14/04/2021</td>
-            <td>Cổng 1</td>
-          </tr>
-          <tr>
-            <td>1</td>
-            <td>ALT20210501</td>
-            <td>123456789034</td>
-            <td style={{width: '200px'}}>Hội chợ triển lãm tiêu dùng 2021</td>
-            <td>
-              <div className={styles.status}>
-                  <OutDate />
-                  <p className={styles.status_title_OutDate}>Hết hạn</p>
-              </div>
-            </td>
-            <td>14/04/2021</td>
-            <td>14/04/2021</td>
-            <td>Cổng 1</td>
-          </tr>
-          <tr>
-            <td>1</td>
-            <td>ALT20210501</td>
-            <td>123456789034</td>
-            <td style={{width: '200px'}}>Hội chợ triển lãm tiêu dùng 2021</td>
-            <td>
-              <div className={styles.status}>
-                  <OutDate />
-                  <p className={styles.status_title_OutDate}>Hết hạn</p>
-              </div>
-            </td>
-            <td></td>
-            <td>14/04/2021</td>
-            <td>-</td>
-          </tr>
+        {state.data
+            .sort((a, b) => a.stt - b.stt)
+            .filter(item => item.booking_code.includes(filterInput))
+            .map((item, index) => 
+              <tr>
+                <td>{item.stt}</td>
+                <td>{item.booking_code}</td>
+                <td>{item.code_ticket}</td>
+                <td style={{width: '200px'}}>{item.name_event}</td>
+                <td>
+                  <div
+                    className={item.status === 1 ? styles.status : item.status === 2 ? styles.boxStatusUnUsed : styles.boxStatusOutDate}
+                  >
+                    <>{item.status === 1 ? <Used /> : item.status === 2 ? <UnUsed /> : <OutDate />}</>
+                    <p className={styles.status_title}>
+                      {item.status === 1 ? "Đã sử dụng" : item.status === 2 ? "Chưa sử dụng" : "Hết hạn"}
+                    </p>
+                  </div>
+                </td>
+                <td>{item.applicable_date !== '' ? item.applicable_date : null}</td>
+                <td>{item.ticketing_date !== '' ? item.ticketing_date : null}</td>
+                <td>
+                  {item.gate_checkin === 1 ? "Cổng 1" : 
+                    item.status === 2 ? 
+                      <div className={styles.statusUnUsed}>
+                        <p>-</p>
+                        <button className={styles.iconEllipsis} onClick={handleChange}><img src={iconEllipsis} alt="" /></button>
+                      </div> : '-'
+                  }
+                </td>
+              </tr> 
+            )
+        }
         </tbody>
       </table>
       {/* <CalendarCustom /> */}

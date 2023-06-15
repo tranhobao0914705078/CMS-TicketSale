@@ -4,7 +4,7 @@ import styles from './FormAddTicket.module.css'
 import iconCalendar from'./icon/calendar.svg'
 import { CalendarCustom } from '../Calendar/CalendarCustom'
 import { db, app } from '../../firebase-config/firebase'
-import { getFirestore, collection, addDoc, getDocs, doc, updateDoc } from "firebase/firestore"; 
+import { getFirestore, collection, addDoc, getDocs, doc, updateDoc, getDoc, setDoc } from "firebase/firestore"; 
 import { reducerTicket, State } from '../../store/TicketReducer'
 
 
@@ -20,7 +20,8 @@ export const AddTicket = () => {
   const [selectDateRight, setSelectDateRight] = useState<string | null>(null);
   const [prevSelectDateRight, setPrevSelectDateRight] = useState<string | null>(null);
   const [applicableDate, setApplicableDate] = useState({date: "", time: ""});
-  const [codeTicket, setCodeTicket] = useState("ALT20210501");
+  
+  const [codeTicket, setCodeTicket] = useState("ALT");
   const [expirationDate, setExpirationDate] = useState({date: "", time: ""});
   const [nameEvent, setNameEvent] = useState("Hội chợ triển lãm hàng tiêu dùng 2021");
   const [nameTicket, setNameTicket] = useState("");
@@ -32,7 +33,7 @@ export const AddTicket = () => {
   }});
   const [optionsStatus, setOptionsStatus] = useState("1");
   const optionStatus = parseInt(optionsStatus);
-  const [index, setIndex] = useState("3");
+  // const [index, setIndex] = useState("3");
 
 
   if (selectDateLeft !== prevSelectDateLeft) {
@@ -123,22 +124,35 @@ export const AddTicket = () => {
 
   // end_Add
   const handleAddTicket = async () => {
+    const listTicketRef = collection(db, "ListTicket");
+    const querySnapshot = await getDocs(listTicketRef);
+    let index = 0;
+    querySnapshot.forEach((doc) => {
+      const stt = doc.data().stt;
+      if(stt > index) {
+        index = stt;
+      }
+    })
+    const newIndex = index + 1;
+    const randomCodeTicket = codeTicket + Math.floor(10000000 + Math.random() * 900000000);
+
     const dataValue = {
-        stt: index,
-        name_ticket: nameTicket,
-        name_event:  "Hội chợ triển lãm hàng tiêu dùng 2021",
-        code_ticket: codeTicket,
-        expiration_date: expirationDate,
-        applicable_date: applicableDate,
-        price_ticket: priceTicket,
-        status: optionStatus
+      stt: newIndex,
+      name_ticket: nameTicket,
+      name_event:  "Hội chợ triển lãm hàng tiêu dùng 2021",
+      code_ticket: randomCodeTicket,
+      expiration_date: expirationDate,
+      applicable_date: applicableDate,
+      price_ticket: priceTicket,
+      status: optionStatus
     }
     const docRef = await addDoc(collection(db, "ListTicket"), dataValue);
-    const newData = { id: docRef.id, 
-        stt: index,
+    const newData = { 
+        id: docRef.id, 
+        stt: newIndex,
         name_ticket: nameTicket,
         name_event:  "Hội chợ triển lãm hàng tiêu dùng 2021",
-        code_ticket: codeTicket,
+        code_ticket: randomCodeTicket,
         expiration_date: expirationDate,
         applicable_date: applicableDate,
         price_ticket: priceTicket,
