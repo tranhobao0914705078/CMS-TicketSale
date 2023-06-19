@@ -310,3 +310,57 @@ tr:nth-child(2n) {
     display: flex;
     justify-content: center;
 }
+
+
+.boxDateRight,
+.boxDateLeft{
+    display: flex;
+    justify-content: space-between;
+    height: 30px;
+}
+
+.boxDateRight input,
+.boxDateLeft input{
+    width: 151px;
+    margin: -5px -3px;
+    border: 1px solid #b5b1b1;
+    padding: 6px 10px;
+    border-radius: 10px;
+    color: #000;
+    cursor: pointer;
+}
+
+.boxDateLeft img{
+    margin: 0 -85px;
+    cursor: pointer;
+}
+
+.toDate{
+    margin: 0 80px;
+}
+
+.boxDateRight img{
+    margin: 0 -40px;
+    cursor: pointer;
+}
+
+.calendarLeft{
+    position: absolute;
+    top: 445px;
+    left: 690px;
+}
+
+.calendarRight{
+    position: absolute;
+    top: 445px;
+    left: 960px;
+}
+
+.customCSV{
+    color: #FF993C;
+}
+
+.customCSV:hover{
+    color: #FF993C;
+}
+

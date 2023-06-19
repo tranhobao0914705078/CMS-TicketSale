@@ -105,8 +105,6 @@ export const CheckTicket = () => {
     alert("Success")
   };
   
-  
-
   const handleCSV = () => {
     const filterData = state.data.filter(item => item.status === 1);
     

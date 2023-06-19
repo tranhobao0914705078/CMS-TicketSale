@@ -30,6 +30,7 @@
 
 .custom{
     margin: 0 80px;
+    color: #1E0D03;
 }
 
 .customDate{
@@ -46,6 +47,7 @@
 
 .content_value{
     margin: 0 120px;
+    color: #1E0D03;
 }
 
 .content_pointer{
@@ -80,18 +82,26 @@
 }
 
 .Calendar{
-    width: 141px;
-    height: 40px;
-    margin: -5px 68px;
-    border: 1px solid #b5b1b1;
     display: flex;
     justify-content: space-between;
+    height: 30px;
+}
+
+.Calendar input{
+    width: 151px;
+    margin: -5px 68px;
+    border: 1px solid #b5b1b1;
     padding: 6px 10px;
     border-radius: 10px;
+    color: #A5A8B1;
+}
+
+.Calendar img{
+    margin: 0 -105px;
 }
 
 .calendarCustom{
     position: absolute;
-    top: 310px;
-    left: 300px;
+    top: 558px;
+    left: 785px;
 }
