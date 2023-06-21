@@ -16,7 +16,7 @@ export const CalendarCustom = ({ className, onSelectDate }: Props) => {
   const [currentDate, setCurrentDate] = useState(new Date());
   const [selectDate, setSelectDate] = useState<string | null>(null);
   const [startDate, setStartDate] = useState<string | null>(null);
-  const [viewMode, setViewMode] = useState<'day' | 'week'>('day'); // Thêm trạng thái chế độ xem
+  const [viewMode, setViewMode] = useState<'day' | 'week'>('day');
 
   const toggleNextMonth = () => {
     if (currentMonth < 11) {
@@ -60,7 +60,7 @@ export const CalendarCustom = ({ className, onSelectDate }: Props) => {
     <div className={`${styles.PickerWrapper} ${className}`}>
         <div className={styles.Header}>
           <FontAwesomeIcon icon={faChevronLeft} className={styles.icon} onClick={togglePrevMonth} />
-          <p>{monthNames[currentMonth]} {currentYear}</p>
+          <p>{monthNames[currentMonth]}, {currentYear}</p>
           <FontAwesomeIcon icon={faChevronRight} className={styles.icon} onClick={toggleNextMonth} />
         </div>
         <div className={styles.selectRadio}>
@@ -68,8 +68,8 @@ export const CalendarCustom = ({ className, onSelectDate }: Props) => {
               <input
                 type="radio"
                 name="date"
-                checked={viewMode === 'day'} // Kiểm tra chế độ xem hiện tại
-                onChange={() => handleViewModeChange('day')} // Xử lý khi chọn chế độ xem "Theo ngày"
+                checked={viewMode === 'day'} 
+                onChange={() => handleViewModeChange('day')} 
               />
               <p>Theo ngày</p>
             </div>
@@ -77,8 +77,8 @@ export const CalendarCustom = ({ className, onSelectDate }: Props) => {
               <input
                 type="radio"
                 name="date"
-                checked={viewMode === 'week'} // Kiểm tra chế độ xem hiện tại
-                onChange={() => handleViewModeChange('week')} // Xử lý khi chọn chế độ xem "Theo tu
+                checked={viewMode === 'week'} 
+                onChange={() => handleViewModeChange('week')}
               />
               <p>Theo Tuần</p>
             </div>

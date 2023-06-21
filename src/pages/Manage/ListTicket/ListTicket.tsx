@@ -29,17 +29,14 @@ interface TicketData{
 }
 
 export const ListTicket = () => {
-
+  const itemPage = 10;
+  const [data, setData] = useState<{id: string}[]>([]);
   const [count, setCount] = useState(0);
   const [isVisibleFilter, setIsVisibleFilter] = useState(false);
   const [isVisibleChange, setIsVisibleChange] = useState(false);
   const [currentPage, setCurrentPage] = useState(1);
-  const totalPage = 20;
-  const handlePageChange = (newPage: number) => {
-    setCurrentPage(newPage);
-  }
+  const totalPage = Math.ceil(data.length / itemPage);
 
-  const [data, setData] = useState<{id: string}[]>([]);
   const [currentID, setCurrentID] = useState("");
   const [state, dispatch] = useReducer( reducerTicket, {data: []} as State);
   const [filterInput, setFilterInput] = useState("");
@@ -58,11 +55,18 @@ export const ListTicket = () => {
         id: doc.id,
         ...doc.data()
       }));
-      dispatch({type: "GET_DATA", payload: data});
+      dispatch({ type: "GET_DATA", payload: data });
       setData(data);
     }
     fetchData();
   }, []);
+
+  const handlePageChange = (newPage: number) => {
+    setCurrentPage(newPage);
+  }
+  const startIndex = (currentPage - 1) * itemPage;
+  const endIndex = startIndex + itemPage;
+  const currentData = state.data.slice(startIndex, endIndex);
   
   const handleFilter = () => {
     setCount(count + 1);
@@ -206,7 +210,7 @@ export const ListTicket = () => {
             <th>STT</th>
             <th>Booking code</th>
             <th>Số vé</th>
-            <th>Tên sự kiện</th>
+            <th style={{width: 200}}>Tên sự kiện</th>
             <th>Tình trạng sử dụng</th>
             <th>Ngày sử dụng</th>
             <th>Ngày xuất vé</th>
@@ -218,11 +222,11 @@ export const ListTicket = () => {
             searchResult
             .filter(item => item.booking_code.includes(filterInput))
             .map((item, index) => 
-            <tr>
+            <tr key={index}>
               <td>{item.stt}</td>
               <td>{item.booking_code}</td>
               <td>{item.code_ticket}</td>
-              <td style={{width: '200px'}}>{item.name_event}</td>
+              <td>{item.name_event}</td>
               <td>
                 <div
                   className={item.status === 1 ? styles.status : item.status === 2 ? styles.boxStatusUnUsed : styles.boxStatusOutDate}
@@ -246,15 +250,15 @@ export const ListTicket = () => {
               </td>
             </tr> 
             ) : 
-            state.data
+            currentData
             .sort((a, b) => a.stt - b.stt)
             .filter(item => item.booking_code.includes(filterInput))
             .map((item, index) => 
-              <tr>
+              <tr key={index}>
                 <td>{item.stt}</td>
                 <td>{item.booking_code}</td>
                 <td>{item.code_ticket}</td>
-                <td style={{width: '200px'}}>{item.name_event}</td>
+                <td>{item.name_event}</td>
                 <td>
                   <div
                     className={item.status === 1 ? styles.status : item.status === 2 ? styles.boxStatusUnUsed : styles.boxStatusOutDate}

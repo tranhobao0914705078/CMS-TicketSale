@@ -7,12 +7,12 @@ import { getAuth } from "firebase/auth";
 
 // Your web app's Firebase configuration
 const firebaseConfig = {
-  apiKey: "AIzaSyBtmZTAraaokQIco2pdNMlMB9HELnsq5IU",
-  authDomain: "ticketsale-77d46.firebaseapp.com",
-  projectId: "ticketsale-77d46",
-  storageBucket: "ticketsale-77d46.appspot.com",
-  messagingSenderId: "697216488030",
-  appId: "1:697216488030:web:b6fccc4d2723ae195c5acf"
+  apiKey: "AIzaSyAqCCqdDyUuw_GMaCfuzjSoxB-peyWKOko",
+  authDomain: "cmsticketsale.firebaseapp.com",
+  projectId: "cmsticketsale",
+  storageBucket: "cmsticketsale.appspot.com",
+  messagingSenderId: "935211913912",
+  appId: "1:935211913912:web:88867bca2adc6447851a4d"
 };
 
 // Initialize Firebase

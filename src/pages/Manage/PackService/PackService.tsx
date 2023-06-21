@@ -23,13 +23,13 @@ interface TicketData {
 }
 
 export const PackService = () => {
-
+  const itemPage = 10;
+  const [data, setData] = useState<TicketData[]>([]);
   const [count, setCount] = useState(0);
   const [isVisibleAdd, setIsVisibleAdd] = useState(false);
   const [isVisibleUpdate, setIsVisibleUpdate] = useState(false);
   const [currentPage, setCurrentPage] = useState(1);
-  const totalPage = 20;
-  const [data, setData] = useState<TicketData[]>([]);
+  const totalPage = Math.ceil(data.length / itemPage);
   const [state, dispatch] = useReducer(reducerTicket, {data: []} as State);
   const [searchTerm, setSearchTerm] = useState('');
   const [currentId, setCurrentId] = useState("");
@@ -40,7 +40,6 @@ export const PackService = () => {
       const querySnapshot = await getDocs(collection(db, "ListTicket"));
       const data = querySnapshot.docs.map((doc) => ({
         id: doc.id,
-        // code_ticket: doc.data().code_ticket,
         ...doc.data(),
       }));
       dispatch({type: "GET_DATA", payload: data});
@@ -52,7 +51,10 @@ export const PackService = () => {
   const handlePageChange = (newPage: number) => {
     setCurrentPage(newPage);
   }
-  
+  const start = (currentPage - 1) * itemPage;
+  const end = start + itemPage;
+  const currentData = state.data.slice(start, end); 
+
   const handleAdd = () => {
     setCount(count + 1);
     if(count === 0){
@@ -114,7 +116,7 @@ export const PackService = () => {
           </tr>
         </thead>
         <tbody>
-          {state.data
+          {currentData
           .sort((a, b) => a.stt - b.stt)
           .filter(item => item.code_ticket.includes(searchTerm))
           .map((item, index) => 

@@ -17,15 +17,16 @@ interface TicketData {
   code_ticket: string;
   applicable_date: string;
   name_ticket: string;
+  name_event: string;
   gate_checkin: number;
   status: number;
 }
 
 export const CheckTicket = () => {
+  const itemsPerPage = 10;
   const [currentPage, setCurrentPage] = useState(1);
-  const totalPage = 20;
-
   const [data, setData] = useState<{ id: string}[]>([]);
+  const totalPage = Math.ceil(data.length / itemsPerPage);
   const [state, dispatch] = useReducer(reducerManageTicket, {data: []} as State);
   const [searchResults, setSearchResults] = useState<TicketData[]>([]);
   const [statusFilter, setStatusFilter] = useState("0");
@@ -33,7 +34,6 @@ export const CheckTicket = () => {
   const [visibleCheckTicket, setVisibleCheckTicket] = useState(false);
   const [visibleCSV, setVisibleCSV] = useState(false);
   const db = getFirestore(app);
-  const navigate = useNavigate();
 
   useEffect(() => {
     const fetchData = async() => {
@@ -51,6 +51,10 @@ export const CheckTicket = () => {
   const handlePageChange = (newPage: number) => {
     setCurrentPage(newPage);
   }
+
+  const startIndex = (currentPage - 1) * itemsPerPage;
+  const endIndex = startIndex + itemsPerPage;
+  const currentData = state.data.slice(startIndex, endIndex);
 
   const handleFilter = () => {
     const filteredData:any = state.data
@@ -160,6 +164,7 @@ export const CheckTicket = () => {
           <tr>
             <th>STT</th>
             <th>Số vé</th>
+            <th>Tên sự kiện</th>
             <th>Ngày sử dụng</th>
             <th>Tên loại vé</th>
             <th>Cổng check-in</th>
@@ -172,6 +177,7 @@ export const CheckTicket = () => {
             <tr key={index}>
               <td>{item.stt}</td>
               <td>{item.code_ticket}</td>
+              <td style={{width: 200}}>{item.name_event}</td>
               <td>{item.applicable_date}</td>
               <td>{item.name_ticket}</td>
               <td>
@@ -184,13 +190,14 @@ export const CheckTicket = () => {
               </td>
             </tr>   
           ) : 
-          state.data
+          currentData
             .sort((a, b) => a.stt - b.stt)
             .filter(item => item.code_ticket.includes(filterInput))
             .map((item, index) =>
               <tr key={index}>
                 <td>{item.stt}</td>
                 <td>{item.code_ticket}</td>
+                <td style={{width: 200}}>{item.name_event}</td>
                 <td>{item.applicable_date}</td>
                 <td>{item.name_ticket}</td>
                 <td>
