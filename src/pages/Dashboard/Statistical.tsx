@@ -7,6 +7,7 @@ import iconCalendar from '../image/calendar.svg'
 import { useState, useEffect } from 'react';
 import { getDocs, collection, query, where, doc } from 'firebase/firestore';
 import { db, app } from '../../firebase-config/firebase';
+import { Month } from '../../component/DropMonth/Month'
 
 interface TicketData {
   id: string;
@@ -52,6 +53,13 @@ export const Statistical: React.FC = () => {
     setUsedCountEvent(usedCountEvent)
     setUnusedCountEvent(unUsedCountEvent)
   }, [data])
+
+  const handleChange = (newValue: number | null) => {
+    if(newValue){
+      
+    }
+  }
+
   return (
     <div className={styles.container}>
       <div className={styles.headerTitle}>
@@ -60,13 +68,14 @@ export const Statistical: React.FC = () => {
       <div className={styles.lineChart}>
         <div className={styles.titleChart}>
           <p className={styles.revenue}>Doanh thu</p>
-          <div className={styles.donutChart_date} onClick={handleClick}>
-            <p>Tháng 4, {currentYear}</p>
-            <img src={iconCalendar} alt="" className={styles.iconCalendar} />
+          <div className={styles.donutChart_date}>
+            <Month onChange={handleChange} className={styles.customMonth}/>
+            {/* <p>Tháng 4, {currentYear}</p>
+            <img src={iconCalendar} alt="" className={styles.iconCalendar} /> */}
           </div>
         </div>
         <div className={styles.customLineChart}>
-          <LineChart />
+          <LineChart className={styles.customLine}/>
         </div>
       </div>
       <div className={styles.revenueOfWeek}>
@@ -79,8 +88,7 @@ export const Statistical: React.FC = () => {
       </div>
       <div className={styles.donutChart}>
           <div className={styles.donutChart_date}>
-            <p>Tháng 4, 2023</p>
-            <img src={iconCalendar} alt="" className={styles.iconCalendar}/>
+            <Month onChange={handleChange} className={styles.customMonth}/>
           </div>
           <div className={styles.boxDonutChart}>
             <div>

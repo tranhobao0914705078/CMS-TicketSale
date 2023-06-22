@@ -81,8 +81,7 @@
     width: 155px;
     height: 40px;
     display: flex;
-    background: #FFFFFF;
-    border: 1px solid #E6E0E0;
+    background: transparent;
     border-radius: 4px;
     cursor: pointer;
     margin: 24px;
@@ -172,4 +171,12 @@
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
+}
+
+.customMonth{
+    margin: -6px -11px;
+}
+
+.customLine{
+    width: 1000px;
 }

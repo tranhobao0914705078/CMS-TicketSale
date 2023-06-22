@@ -232,6 +232,20 @@ tr:nth-child(2n) {
     cursor: default;
 }
 
+.actionsLeft_Date img{
+    cursor: pointer;
+}
+
+.actionsLeft_Date input{
+    border: none;
+    background-color: #E0E0E0;
+    width: 100px;
+}
+
+.actionsLeft_Date input:focus{
+    border: none;
+}
+
 .actionsLeft_Date:hover{
     opacity: 0.8;
 }
@@ -245,6 +259,12 @@ tr:nth-child(2n) {
     font-size: 18px;
     color: #FF993C;
     background-color: transparent;
+}
+
+.customCalendar{
+    position: absolute;
+    top: 365px;
+    left: 1293px;
 }
 
 .paginate {    

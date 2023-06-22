@@ -8,7 +8,11 @@ type Action =
     | { type: "GET_DATA"; payload: any[]}
     | { type: "UPDATE_DATA"; payload: any[]}
 
-export function reducerManageTicket(state: State, action: Action): State{
+const initialSate: State = {
+    data: [],
+}
+
+export function reducerManageTicket(state: State = initialSate, action: Action): State{
     switch(action.type){
         case "GET_DATA":
             return {...state, data: action.payload};

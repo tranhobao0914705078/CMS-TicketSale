@@ -9,6 +9,7 @@ import { db, app } from '../../../firebase-config/firebase';
 import { getFirestore, collection, addDoc, getDocs, doc, updateDoc, getDoc } from "firebase/firestore"; 
 import { reducerManageTicket, State } from '../../../store/ManageTicket'
 import { CSVLink } from 'react-csv';
+import { CalendarCustom } from '../../../component/Calendar/CalendarCustom'
 import { headersTicketCSV } from '../../../store/HeaderCSV/HeaderCSVTicket'
 
 interface TicketData {
@@ -23,7 +24,7 @@ interface TicketData {
 }
 
 export const CheckTicket = () => {
-  const itemsPerPage = 10;
+  const itemsPerPage = 5;
   const [currentPage, setCurrentPage] = useState(1);
   const [data, setData] = useState<{ id: string}[]>([]);
   const totalPage = Math.ceil(data.length / itemsPerPage);
@@ -33,6 +34,10 @@ export const CheckTicket = () => {
   const [filterInput, setFilterInput] = useState("");
   const [visibleCheckTicket, setVisibleCheckTicket] = useState(false);
   const [visibleCSV, setVisibleCSV] = useState(false);
+  const [selectDate, setSelectDate] = useState<string | null>(null); 
+  const fromDate = '01/06/2023'
+  const [count, setCount] = useState(0);
+  const [visibleCalendar, setVisibleCalendar] = useState(false);
   const db = getFirestore(app);
 
   useEffect(() => {
@@ -57,25 +62,34 @@ export const CheckTicket = () => {
   const currentData = state.data.slice(startIndex, endIndex);
 
   const handleFilter = () => {
-    const filteredData:any = state.data
-      .sort((a, b) => a.stt - b.stt)
-      .filter(item => {
-        if (statusFilter === "0"){
-          setVisibleCSV(false);
-          setVisibleCheckTicket(false);
-          return true
-        }else if(statusFilter === "1"){
-          setVisibleCheckTicket(false);
-          setVisibleCSV(true);
-          return item.status === 1;
-        } else if(statusFilter === "2"){
-          setVisibleCSV(false);
-          setVisibleCheckTicket(true);
-          return item.status !== 1;
-        }
-        return item.status === parseInt(statusFilter); 
-      })
-      .filter(item => item.code_ticket.includes(filterInput));
+    const filteredData: TicketData[] = state.data
+    .sort((a, b) => a.stt - b.stt)
+    .filter((item: TicketData) => {
+      if (statusFilter === "0"){
+        setVisibleCSV(false);
+        setVisibleCheckTicket(false);
+        return true
+      }else if(statusFilter === "1"){
+        setVisibleCheckTicket(false);
+        setVisibleCSV(true);
+        return item.status === 1;
+      } else if(statusFilter === "2"){
+        setVisibleCSV(false);
+        setVisibleCheckTicket(true);
+        return item.status !== 1;
+      }
+      return item.status === parseInt(statusFilter);
+    })
+    .filter((item: TicketData) => {
+      if (selectDate && fromDate) {
+        const startDate = fromDate;
+        const endDate = selectDate;
+        const applicableDate = item.applicable_date;
+        return applicableDate >= startDate && applicableDate <= endDate;
+      }
+      return true;
+    });
+    setSelectDate("")
     setSearchResults(filteredData); 
   };
 
@@ -130,6 +144,16 @@ export const CheckTicket = () => {
     )
   }
 
+  const handleCalendar = () => {
+    setCount(count + 1);
+    if(count === 0){
+      setVisibleCalendar(true);
+    }else if(count === 1){
+      setVisibleCalendar(false);
+      setCount(0);
+    }
+  }
+
   return (
     <div className={styles.container}>
       <div className={styles.boxLeft}>
@@ -173,7 +197,9 @@ export const CheckTicket = () => {
         </thead>
         <tbody>
           {searchResults.length > 0 ? 
-            searchResults.map((item, index) => 
+            searchResults
+            .filter(item => item.code_ticket.includes(filterInput))
+            .map((item, index) => 
             <tr key={index}>
               <td>{item.stt}</td>
               <td>{item.code_ticket}</td>
@@ -260,19 +286,22 @@ export const CheckTicket = () => {
         <div className={styles.actionsDate}>
           <p className={styles.statusCheck}>Từ ngày</p>
           <div className={styles.actionsLeft_Date}>
-              <p>01/05/2023</p>
-              <img src={iconCalendar} alt="" />
+                <input type="text" value={fromDate} disabled placeholder='dd/mm/yy'/>
+                <img src={iconCalendar} alt="" />
+              {/* <p>01/05/2023</p>
+              <img src={iconCalendarActive} alt="" /> */}
           </div>
         </div>
         <div className={styles.actionsDate}>
           <p className={styles.statusCheck}>Đến ngày</p>
           <div className={styles.actionsLeft_Date}>
-              <p>dd/mm/yy</p>
-              <img src={iconCalendarActive} alt="" />
+          <input type="text" value={selectDate || ''} placeholder='dd/mm/yy'/>
+            <img src={iconCalendarActive} alt=""  onClick={handleCalendar}/>
           </div>
         </div>
         <button onClick={handleFilter} className={styles.Filter}>Lọc</button>
       </div>
+      {visibleCalendar && <CalendarCustom onSelectDate={setSelectDate} className={styles.customCalendar}/>}
     </div>
   )
 }

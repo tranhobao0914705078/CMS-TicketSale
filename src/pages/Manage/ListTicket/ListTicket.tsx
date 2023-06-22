@@ -220,7 +220,7 @@ export const ListTicket = () => {
         <tbody>
           {searchResult.length > 0 ? 
             searchResult
-            .filter(item => item.booking_code.includes(filterInput))
+            .filter(item => item.code_ticket.includes(filterInput))
             .map((item, index) => 
             <tr key={index}>
               <td>{item.stt}</td>
@@ -252,7 +252,7 @@ export const ListTicket = () => {
             ) : 
             currentData
             .sort((a, b) => a.stt - b.stt)
-            .filter(item => item.booking_code.includes(filterInput))
+            .filter(item => item.code_ticket.includes(filterInput))
             .map((item, index) => 
               <tr key={index}>
                 <td>{item.stt}</td>

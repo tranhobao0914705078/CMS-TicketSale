@@ -9,8 +9,12 @@ ChartJS.register(
     LinearScale,
     PointElement
 )
-    
-const LineChart: React.FC = () => {
+
+interface Props {
+  className: string
+}
+
+const LineChart: React.FC<Props> = ({ className }) => {
   const data = {
     labels: ['Thứ 2', 'Thứ 3', 'Thứ 4', 'Thứ 5', 'Thứ 6', 'Thứ 7', 'CN'],
     datasets: [
@@ -61,7 +65,7 @@ const LineChart: React.FC = () => {
     },
   };
 
-  return <div className={styles.lineChart}><Line data={data} options={options} /></div>;
+  return <div className={`${styles.lineChart} ${className}`}><Line data={data} options={options} /></div>;
 };
 
 export default LineChart;

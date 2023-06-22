@@ -21,6 +21,7 @@ export const ChangeTicket = ({ currentID }: { currentID: string}) => {
     const [typeTicket, setTypeTicket] = useState("");
     const [nameEvent, setNameEvent] = useState("");
     const [ticketDate, setTicketDate] = useState("");
+
     // updated
     const [selectedDate, setSelectedDate] = useState<string | null>(null);
     const [prevDate, setPrevDate] = useState<string | null>(null);
